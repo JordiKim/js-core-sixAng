@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>這裡有一句話請點擊</p>
+    <script>
+        // #沒有arguments 參數
+        // 將以下改寫成Arrow Function，並觀察差異
+        // const nums = function() {
+        //     console.log(arguments);
+        // }
+        // nums(10, 50, 100, 50, 5, 1, 1, 1, 500);
+
+        // 改寫後
+        // 使用其餘參數
+        // const nums = (...arg) => {
+        //     console.log(arg);
+        // }
+        // nums(10, 50, 100, 50, 5, 1, 1, 1, 500);
+
+        // this綁定的差異
+        // 傳統函式和箭頭函式是不一樣的
+        // var myName = '全域';
+        // var person = {
+        //     myName: '小明',
+        //     callName: function() {
+        //         console.log('1', this.myName); // 1.小明 指向外層的person內的myName
+        //         setTimeout(function(){  // setTimeout是屬於簡易呼叫，this就會指向window
+        //             console.log('2', this.myName); // 2.全域 指向window
+        //             console.log(this); // 3.單純看this可以發現setTimeout的this是指向window
+        //         }, 10);
+        //     },
+        // }
+
+        // person.callName();
+
+        // 改寫後
+        // 將setTimeout改寫成箭頭函式
+        // 可以發現箭頭函式沒有自己的this，因此箭頭函式的this會指向他的外層
+        // var myName = '全域';
+        // var person = {
+        //     myName: '小明',
+        //     callName: function() {
+        //         console.log('1', this.myName); // 1.小明 指向外層的person內的myName
+        //         setTimeout(() => {  
+        //             console.log('2', this.myName); // 2.小明 指向外層的person內的myName
+        //             console.log(this); // 3.單純看this可以發現setTimeout的this是指向外層的person內的myName
+        //         }, 10);
+        //     },
+        // }
+
+        // person.callName();
+
+        // 再次改寫後
+        // 將function也改寫成箭頭函式
+        // 可以發現箭頭函式沒有自己的this，因此箭頭函式的this會指向他的外層
+        // var myName = '全域';
+        // var person = {
+        //     myName: '小明',
+        //     callName: () => {
+        //         console.log('1', this.myName); // 1.全域 指向外層的myName
+        //         setTimeout(() => {  
+        //             console.log('2', this.myName); // 2.全域 指向外層的myName
+        //             console.log(this); // 3.單純看this可以發現setTimeout的this是指向外層的myName
+        //         }, 10);
+        //     },
+        // }
+
+        // person.callName();
+
+        // #this不同，導致DOM的this也會指向不同位置
+        // 傳統函式時this的指向 
+        // 指向當前上面的DOM元素
+        // const ele = document.querySelector('p');
+        // ele.addEventListener('click', function() {
+        //     console.log(this);
+        // });
+
+        // 箭頭函式時this的指向 
+        // 指向window，因為箭頭函式沒有自己的this
+        // const ele = document.querySelector('p');
+        // ele.addEventListener('click', () => {
+        //     console.log(this);
+        // });
+
+        // 傳統函式
+        const Fn = function(a){
+            this.name = a;
+        }
+
+        // 箭頭函式
+        const ArrowFn = a => {
+            this.name = a;
+        }
+
+        console.log(Fn.prototype, ArrowFn.prototype);
+        // 可以發現傳統函式有prototype，但箭頭函式沒有，因此箭頭函式無法作為建構函式使用
+
+        const a = new Fn('ss');
+        console.log(a);
+
+        const b = new ArrowFn('ww');
+        console.log(b);
+
+        // 箭頭函式的this和傳統函式的指向是不一樣的
+        // 箭頭函式無法作為建構函式使用
+    </script>
+</body>
+</html>

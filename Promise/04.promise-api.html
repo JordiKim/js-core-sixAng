@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise常用方法</title>
+</head>
+<body>
+    <script>
+        // time 預設值是500(當沒有傳任何time時)
+        function promiseFn(num, time = 500) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    if(num){
+                        resolve(`成功 ${num}`);
+                    }else{
+                        reject('失敗');
+                    }
+                }, time);
+            })
+        }
+
+        // promiseFn(10, 5000)
+        //     .then( (res) => {
+        //         console.log(res);
+        //     })
+        //     .catch( (res) => {
+        //         console.log(res);
+        //     })
+
+        // 這裡的Promise是指上面function new的Promise
+        // 使用all這個方法, 裡面帶入的是一個陣列
+        // 當陣列內的所有的內容都被完成後，就可以使用then來執行所有的結果
+        // 當陣列中一個是失敗的結果時就會中斷所有並執行catch
+
+        Promise.all([
+            promiseFn(1, 500),
+            promiseFn(2, 1000),
+            promiseFn(3, 2000),
+        ])
+            // // 傳入陣列，一樣會回傳陣列
+            // .then( (res) => {
+            //     console.log(res);
+            // })
+
+            // 傳入陣列，一一取出值
+            .then( (res) => {
+                console.log(res[0], res[2]);
+            })
+
+            .catch( (res) => {
+                console.log(res);
+            })
+    </script>
+</body>
+</html>

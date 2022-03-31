@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <!-- 箭頭函式實戰用法 -->
+</head>
+<body>
+    <!-- 範例一 Start -->
+    <script>
+        // // 搭配陣列方法
+        // // 陣列雙倍
+        // const arr = [15, 12, 63, 67, 1421, 124, 567, 235];
+
+        // const arrDouble = arr.map(function(num){
+        //     return num * 2;
+        // })
+
+        // console.log(arrDouble);
+
+        // 使用箭頭函式
+        // 搭配陣列方法
+        // 陣列雙倍
+        const arr = [15, 12, 63, 67, 1421, 124, 567, 235];
+
+        const arrDouble = arr.map(num => num * 2);
+
+        console.log(arrDouble);
+    </script>
+    <!-- 範例一 End -->
+
+    <!-- 範例二 Start -->
+    <script>
+        // // 平均數
+        // const average = function(){
+        //     const nums = Array.from(arguments);
+
+        //     // reduce方法可以透過迴圈將陣列裡的值一一帶入
+        //     // 但reduce在第一次執行時需要帶入前一個值
+        //     // 在下面有一個0就是reduce在第一次執行時的前一個值
+        //     // 因此0就會帶入到acc這個變數裡，val就是傳進來的值
+        //     // 如下：
+        //     // 第一次執行： acc: 0, val: 1, acc + val = 1;
+        //     // 第二次執行： acc: 1, val: 2, acc + val = 3;
+        //     // 第三次執行： acc: 3, val: 3, acc + val = 6;
+        //     // 第四次執行： acc: 6, val: 4, acc + val = 10;
+        //     // 第五次執行： acc: 10, val: 5, acc + val = 15;
+        //     // total = 15;
+        //     // average = total / nums.lengh = 15 / 陣列長度 = 15 / 5 = 3;
+        //     // average = 3;
+        //     const total = nums.reduce(function(acc, val){
+        //         return acc + val;
+        //     }, 0);
+        //     console.log(total);
+
+        //     return total / nums.length;
+        // }
+
+        // console.log(average(1, 2, 3, 4, 5));
+
+        // 使用箭頭函式
+        // 平均數
+        // (...num) 和 const nums = Array.from(arguments); 是一樣效果
+        // 把num帶進來reduce
+        // 取得平均數 = 3
+        const average = (...num) => num.reduce((acc, val) => acc + val, 0) / num.length;
+
+        const total = (...num) => num.reduce((acc, val) => acc + val, 0);
+
+        console.log(average(1, 2, 3, 4, 5));
+        console.log(total(1, 2, 3, 4, 5));
+    </script>
+    <!-- 範例二 End -->
+
+    <!-- 範例三 End -->
+    <script>
+        // // 物件內this
+        // const person = {
+        //     data: {
+        //     },
+        //     getData: function(){
+        //         const vm = this;
+        //         $.ajax({
+        //             url: 'https://randomuser.me/api/',
+        //             dataType: 'json',
+        //             success: function(data) {
+        //                 console.log(data);
+        //                 vm.data = data.results[0];
+        //                 console.log('person.data', person.data);
+        //             }
+        //         });
+        //     }
+        // } 
+        // person.getData();
+
+        // 寫成箭頭函式
+        // 物件內this
+        const person = {
+            data: {
+            },
+            getData: function(){
+                // const vm = this;
+                $.ajax({
+                    url: 'https://randomuser.me/api/',
+                    dataType: 'json',
+                    success: (data) => {
+                        console.log(data);
+                        this.data = data.results[0];
+                        console.log('person.data', person.data);
+                    }
+                });
+            }
+        } 
+        person.getData();
+    </script>
+    <!-- 範例三 End -->
+    
+</body>
+</html>

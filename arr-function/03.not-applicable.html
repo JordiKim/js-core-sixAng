@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 第一個範例 Start -->
+    <script>
+        //  正常的函式回傳
+        // 會回傳1
+        // const arrFn = () => 1;
+
+        // console.log(arrFn());
+
+        // 常見錯誤
+        // 改成物件的形式
+        // 會回傳undefined
+        // 因為不能直接回傳物件實字
+        // const arrFn = () => {data: 1};
+
+        // console.log(arrFn());
+
+        // 正確方式
+        // 會回傳{data: 1}
+        // 加上括號後就能正確回傳物件實字
+        // const arrFn = () => ({data: 1});
+
+        // console.log(arrFn());
+    </script>
+    <!-- 第一個範例 End -->
+
+    <!-- 第二個範例 Start -->
+    <script>
+        // 1
+        // 使用判斷式時
+        // 正確執行
+        // let num = 0;
+
+        // // 這裡的num是假值，因此後面的funtion會直接把值賦予給numFn
+        // const numFn = num || function(){ return 1 };
+
+        // // 執行函式後得到1
+        // console.log(numFn());
+
+        // // 2
+        // // 使用判斷式時
+        // // 出現錯誤
+        // // 改成箭頭函式後出現問題
+        // // 改成箭頭函式後不能直接使用判斷式，否則會出現問題
+        // let num = 0;
+
+        // // 這裡的num是假值，因此後面的funtion會直接把值賦予給numFn
+        // const numFn = num || () => 1;
+
+        // // 執行函式會不能執行
+        // console.log(numFn());
+
+        // 3 
+        // 使用判斷式時
+        // 修改後
+        // 加上括號就能解決
+        let num = 0;
+
+        // 這裡的num是假值，因此後面的funtion會直接把值賦予給numFn
+        const numFn = num || (() => 1);
+
+        // 執行函式後得到1
+        console.log(numFn());
+
+        // 結論：
+        // 使用判斷式時他的後面是不能直接接箭頭函式的，必須加上括號
+    </script>
+    <!-- 第二個範例 End -->
+
+    <!-- 第三個範例 Start -->
+    <script>
+        // // 1
+        // // 這裏this會指向全域
+        // // 因此執行時會無法正確取得
+        // const  person = {
+        //     myName: '小明',
+        //     callName: () => { // 這裏this會指向全域
+        //         console.log(this.myName);
+        //     },
+        // }
+
+        // person.callName();
+
+        // 2
+        // 正確的方式應該要使用function
+        const  person = {
+            myName: '小明',
+            callName: function() { // 這裏this會指向person
+                console.log(this.myName);
+            },
+        }
+
+        person.callName();
+    </script>
+    <!-- 第三個範例 End -->
+</body>
+</html>

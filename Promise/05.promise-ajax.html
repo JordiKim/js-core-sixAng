@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise與ajax</title>
+</head>
+<body>
+    <script>
+        // https://jsonplaceholder.typicode.com 提供假資料讓人練習api
+
+        // 先定義遠端路徑
+       const url = 'https://jsonplaceholder.typicode.com/todos/1';
+
+    //    // 以下是不好管理的範例
+    //    // 透過 XMLHttpRequest 這個建構函式 建立一個新物件
+    //    // 定義Http request(Web API)
+    //    let req = new XMLHttpRequest();
+
+    //    // 定義方法
+    //    req.open('GET', url);
+
+    //    req.onload = function () {
+    //        if(req.status === 200){
+    //            // 成功直接列出結果
+    //            console.log(req.response);
+    //        }else{
+    //            // 失敗的部分
+    //            console.log('fail, 沒有資料回傳');
+    //        }
+    //    };
+
+    //    // 送出請求
+    //    // 送出請求才會執行
+    //    // 可以在開發人員工具的Network的XHR觀察狀態
+    //    // 並可以在preview看到遠端所回傳的資料
+    //    req.send();
+
+
+    // 透過Promise
+
+    // 練一個get方法，並傳入遠端路徑
+    function get(url){
+        return new Promise( (resolve, reject) => {
+            let req = new XMLHttpRequest();
+
+            req.open('GET', url);
+
+            req.onload = function () {
+                if(req.status === 200){
+                    resolve(req.response);
+                }else{
+                    reject(req);
+                }
+            }
+
+            req.send();
+        })
+    }
+
+    get(url)
+        .then( (res) => {
+            console.log('成功get', res);
+            // 再次鏈接其他url
+            return get(url);
+        })
+
+        // 接收鏈接的url
+        .then( (res) => {
+            console.log('成功get', res);
+        })
+
+        .catch( (res) => {
+            console.log('失敗', res)
+        })
+    </script>
+</body>
+</html>

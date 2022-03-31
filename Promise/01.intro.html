@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <title>使用jq的ajax處理非同步</title>
+</head>
+<body>
+    <!-- 取得info,就是這次取得包含哪些內容。
+    results,就是這次回傳的資料結構 -->
+    <script>
+        const url = 'https://randomuser.me/api/';
+
+        // 第一種寫法
+        $.ajax({
+            url: url,
+        }).done(function (res){
+            console.log(res);
+        });
+
+        // 第二種寫法
+        $.ajax({
+            url = 'https://randomuser.me/api/',
+            dataType: JSON,
+            success: function(data){
+                console.log(data);
+            }
+        });
+    </script>
+</body>
+</html>

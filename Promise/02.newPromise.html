@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>創建自己的Promise</title>
+</head>
+<body>
+    <script>
+        // 基礎建立Promise寫法
+
+        // console.dir(Promise);
+
+        // // 透過new的方式將Promise實體化，並賦予給a
+        // // 建立一個Promise實體時必須同時加入一個callback function
+        // const a = new Promise( () => {
+        // });
+
+        // console.log(a);
+    </script>
+
+    <script>
+        // 這個物件並沒辦法傳入參數，因此一般不使用這種寫法，這種寫法缺乏彈性
+        // 所以要把一個函式轉成Promise，這樣在運用上會比較具有彈性
+
+
+        // 成功就會執行resolve
+        // 失敗就會執行reject
+        // resolve 和 reject一次只會執行一個
+        // const a = new Promise( (resolve, reject) => {
+        //     // resolve('success')
+        //     reject('fail')
+        // });
+
+        // console.log(a);
+
+        // // then是用來接收成功的結果
+        // // catch可以用來接收reject
+        // a.then( (res) => {
+        //     console.log(res);
+        // }).catch( (res) => {
+        //     console.log(res);
+        // })  
+    </script>
+
+    <script>
+        // 建立Promise函式
+        // 可以使用函式的呈述式或表達式都可以
+
+        // // 函式表達式
+        // const promiseFn2 = () => {
+        //     return new Promise((resolve, reject) => {
+
+        //     })
+        // }
+
+        // // 以函數的呈述式
+        // function promiseFn() {
+        //     return new Promise((resolve, reject) => {
+
+        //     })
+        // }
+    </script>
+
+    <script>
+        // 以函數呈述式為例
+        
+        // 帶入參數num
+        function promiseFn(num) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    if(num){
+                        resolve('成功');
+                    }else{
+                        reject('失敗');
+                    }
+                }, 10);
+            })
+        }
+
+        promiseFn(0)
+            .then( (res) => {
+                console.log(res);
+            }).catch( (res) => {
+                console.log(res);
+            })
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 關於ES6的新增語法
+        // 1.讓原有js攥寫更為精簡
+        // 2.讓js攥寫觀念更為直覺、簡便(新方法)
+
+        // 這是一段函式表達式
+        // 1.如果程式碼內容為表達式時
+        // const callName = function(someone){
+        //     return '我是 ' + someone;
+        // }
+        // console.log(callName('小明'));
+
+        // 修改後
+        // 如果只有一個參數的時候，可以把(someone)外的括號去掉寫成someone
+        // 如果沒有參數時，需要至少保留一個括號
+        const callName = (someone) => '我是 ' + someone;
+        console.log(callName('小明'));
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
