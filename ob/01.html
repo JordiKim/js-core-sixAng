@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>物件取值新增刪除</title>
+</head>
+<body>
+    <script>
+        // 物件
+        // 屬性： 值
+        // 屬性都是字串型別
+        var family = {
+            name: '小明家',
+            deposit: 5000,
+            members: {
+                mom: '老媽',
+                ming: '小明'
+            },
+
+            callFamily: function() {
+                console.log('聯絡小明家');
+            }
+        };
+
+        // 取值 start
+        console.log(family.name); // 小明家
+        console.log(family.members.mom); // 老媽
+
+        // 使用這個方式取值的好處是可以利用變數取值 start
+        console.log(family['name']); // 小明家
+
+        var strName = 'name';
+        console.log(family[strName]); // 小明家
+        // 使用這個方式取值的好處是可以利用變數取值 end
+
+        family.callFamily(); // 聯絡小明家
+        family['callFamily'](); // 聯絡小明家
+        // 取值 end
+
+        // 增加屬性 start
+
+        // 以點
+        family.dog = '小白';
+
+        // 以中括號
+        family['kitten'] = '小貓';
+        family['$'] = 'money';
+
+        console.log(family);
+        // 增加屬性 end
+
+        // 刪除 start
+
+        // 以點
+        delete family.deposit;
+
+        // 以中括號
+        delete family['$'];
+
+        console.log(family);
+        // 刪除 end
+        
+    </script>
+</body>
+</html>

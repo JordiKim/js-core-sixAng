@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>閉包的概念</title>
+</head>
+<body>
+    <script>
+        function storeMoney(){
+            var money = 1000;
+            return function(price) {
+                money = money + price;
+                return money;
+            }
+        }
+
+        var MingMoney = storeMoney();
+        console.log(MingMoney(100)); // 1100 // store裡的money都沒有釋放掉，因此會一直存在
+        console.log(MingMoney(100)); // 1200
+        console.log(MingMoney(100)); // 1300
+
+        var JayMoney = storeMoney();
+        console.log(JayMoney(1000)); // 2000
+        console.log(JayMoney(1000)); // 3000
+        console.log(JayMoney(1000)); // 4000
+    </script>
+</body>
+</html>

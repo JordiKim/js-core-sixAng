@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>立即函式 (IIFE)</title>
+</head>
+<body>
+    <script>
+        (function () {
+            // 立刻執行，不需要呼叫
+            // 無法在函式外被執行
+            console.log('立即函式');
+        })();
+
+        (function(){
+            // 可以限制var的作用域
+            var Ming = '小明';
+            console.log(Ming);
+        })();
+
+        // 立即函式傳遞參數的寫法
+        (function(where) {
+            console.log(where);
+        })('小明在這');
+
+        // 立即函式傳遞參數的寫法並賦予給外層變數寫法
+        var whereMing = (function(where) {
+            console.log(where);
+            return where;
+        })('小明在這');
+
+        console.log(whereMing);
+
+        // 在兩個立即函數之間傳遞內容 start
+        // 利用物件的傳參考的特性
+        // 寫法1也能寫成寫法2和寫法3
+        var a = {};
+
+        // 寫法1
+        // (function(b){
+        //     b.person  = '小明';
+        // })(a);
+        // (function(c){
+        //     console.log(c.person);
+        // })(a);
+
+        // 寫法2
+        ((b) => { b.person  = '小明'})(a);
+        ((c) => { console.log(c.person)})(a);
+
+        // 寫法3
+        // 常利用在框架的原始碼的方法中
+        // 這裏會把person掛載到全域
+        (function(global){
+            global.person  = '小花';
+        })(window);
+        (function(c){
+            console.log(person);
+        })();
+        // 在兩個立即函數之間傳遞內容 end
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,3 @@
+關於03.html
+
+主要是關於this: call, apply, bind與嚴謹模式看不懂所以還沒寫ＸＤ

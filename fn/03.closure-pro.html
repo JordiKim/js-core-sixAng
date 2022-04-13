@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>閉包的私有方法</title>
+</head>
+<body>
+    <script>
+        // 函式工廠
+        // 私有方法
+        function storeMoney(initValue){
+            var money = initValue || 1000;
+            return{
+                increase: function(price){
+                    money += price;
+                },
+                decrease: function(price){
+                    money -= price;
+                },
+                value: function() {
+                    return money;
+                }
+            }
+        }
+
+        var MingMoney = storeMoney(); // 沒有傳參數時，使用預設1000
+        MingMoney.increase(100);
+        console.log(MingMoney.value());
+
+        var JayMoney = storeMoney(5000); 
+        JayMoney.increase(100);
+        console.log(JayMoney.value());
+        
+    </script>
+</body>
+</html>

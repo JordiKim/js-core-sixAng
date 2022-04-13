@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>最常見的this: 物件的方法調用</title>
+</head>
+<body>
+    <!-- 八成的this指向都靠這裏的觀念 -->
+    <!-- this基本觀念 -->
+    <!-- 1.每個執行環境都有屬於自己的this關鍵字 -->
+    <!-- 2.this和函式如何宣告沒有關聯性，僅與呼叫方法有關 -->
+    <!-- 3.在嚴格模式下，簡易呼叫會有會有很大的改變 -->
+
+    <!-- 影響this的調用方式 -->
+    <!-- 1.作為呼叫方法(最常利用this的方法) -->
+    <!-- 2.簡易呼叫(絕大多數的呼叫方式) // 不建議在這種方式下使用this -->
+    <!-- 3.bind, apply, call 方法 -->
+    <!-- 4.new -->
+    <!-- 5.DOM事件處理器 -->
+    <!-- 6.箭頭函式 -->
+
+    <!-- 作為呼叫方法(最常利用this的方法) -->
+    <!-- this: 物件的方法調用(最常見的形式) -->
+    <!-- 重點1: this和函式如何宣告沒有關聯性，僅與呼叫方法有關 -->
+    <!-- 重點2: 物件的方法調用時，僅需要關注是在哪一個物件下呼叫 -->
+    <script>
+        var myName = '真心鎮大冒險';
+
+        function callName() {
+            console.log(this.myName);
+        }
+
+        // var family = {
+        //     myName: '小明家',
+        //     call: callName,
+        //     Ming: {
+        //         myName: '小明',
+        //         call: callName
+        //     }
+        // }
+
+        // family.call(); // 小明家 // 因為這裏執行的物件在family所以this會指向family
+        // family.Ming.call(); // 小明 // 因為這裏執行的物件在Ming所以this會指向Ming
+
+        var family = {
+            myName: '小明家',
+            call: function () {
+                console.log(this.myName);
+            }
+        }
+
+        var callcall = family.call;
+        callcall(); // 真心鎮大冒險 // 因為這裏執行的物件在全域所以this會指向全域
+    </script>
+</body>
+</html>

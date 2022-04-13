@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this: 簡易呼叫(simple-call)</title>
+</head>
+<body>
+    <!-- 直接呼叫方法都是屬於simple-call -->
+    <!-- 這樣使用的this都是指向window -->
+    <!-- 盡量不要使用simple-call的this -->
+    <script>
+        // 範例一
+        // 最常見的簡易呼叫 start
+        var myName = '真心鎮大冒險';
+
+        function callName() {
+            console.log(this.myName);
+        }
+
+        callName();
+        // 最常見的簡易呼叫 end
+
+        // 範例二
+        // IIFE也算是簡易呼叫的一種 start
+        (function(){
+            console.log(this.myName);
+            return function callSomeone(){
+                console.log(this.myName);
+            }
+            callSomeone();
+        })();
+        // IIFE也算是簡易呼叫的一種 end
+
+        // 範例三
+        // 這個案例直接這樣使用，因此也算是simple-call的一種 start
+        function easyCard(base){
+            var money = base;
+            return function(update){
+                money = money + update;
+                console.log(this.myName, money);
+            }
+        }
+
+        var MingEasyCard = easyCard(100);
+
+        MingEasyCard(10);
+        // 這個案例直接這樣使用，因此也算是simple-call的一種 end
+
+        // 範例四 callbackFn也是屬於simple-call
+        
+        // 範例五 使用setTimeout時會指向到全域 start
+        var family = {
+            myName: '小明家',
+            call: function(){
+                setTimeout(function(){
+                    console.log(this.myName);
+                }, 1000);
+            }
+        }
+        family.call(); // 真心鎮大冒險
+
+        // 範例五 使用setTimeout時會指向到全域的方式 end
+
+        // 解決範例五 使用setTimeout時會指向到全域 start
+        var family = {
+            myName: '小明家',
+            call: function(){
+                var self = this;
+                setTimeout(function(){
+                    console.log(self.myName);
+                }, 1000);
+            }
+        }
+        family.call(); // 真心鎮大冒險
+        // 解決範例五 使用setTimeout時會指向到全域的方式 end
+    </script>
+</body>
+</html>

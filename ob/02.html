@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>淺層複製與深層複製</title>
+</head>
+<body>
+    <script>
+        var family = {
+            name: '小明家',
+            members: {
+                father: '老爸',
+                mom: '老媽',
+                ming: '小明'
+            }
+        };
+
+        // 淺層複製 start
+        var newFamily = {};
+
+        for(key in family){
+            // console.log(key); // name members // 得到family的屬性
+            // console.log(family[key]); // name的值 和 members的值 // 得到family裡的屬性的值
+            // console.log(key, family[key]); // key = family的屬性, family[key] = 會得到family屬性的值
+            
+            // 將family裡的屬性和值都複製一份給newFamily 
+            // 但如果屬性裡有物件，則會複製物件參考位置 
+            newFamily[key] = family[key];
+        }
+        // 淺層複製 end
+
+
+    </script>
+</body>
+</html>

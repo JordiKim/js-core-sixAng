@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>什麼是函式</title>
+</head>
+<body>
+    <script>
+        // 函式結構 start
+        function afunction(parameter){
+            var localVariable = '區域變數';
+            console.log(this, localVariable);
+
+            return '附加一段' + parameter; // 回傳參數
+        }
+
+        var data = afunction('參數'); // 呼叫函式
+
+        console.log(data);
+        // 函式結構 end
+
+        // 名稱
+        function functionA() {
+            console.log('函式陳述式', '具名函式'); // 這裡的function有名稱
+            console.log(functionA);
+        }
+        
+        functionA();
+        
+        var functionB = function() {
+            // 不是每個函式表達式都是匿名函式
+            console.log('函式表達式', '匿名函式'); // 這裡的function沒有名稱
+            console.log(functionB);
+        }
+
+        functionB();
+
+        var functionC = function functionD() {
+            // 這裡的具名函式只有在這裡能被調用，在這裏以外並不能被調用
+            console.log(functionC, functionD);
+        }
+
+        functionC();
+
+        var num = 1;
+        var giveMeMoney = function giveMoreMoney(coin) {
+            num += 1;
+            console.log('執行giveMeMoney', num ,coin);
+            return coin > 100 ? coin : giveMoreMoney(num * coin);
+        }
+
+        console.log(giveMeMoney(30));
+
+        function callSomeone(fns){ // 直接傳入函式
+            fns();
+        }
+
+        callSomeone(function() {console.log('執行函式')});
+    </script>
+</body>
+</html>
