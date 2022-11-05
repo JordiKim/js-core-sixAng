@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <script>
+      function promiseFn(num) {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            if (num) {
+              resolve("成功");
+            } else {
+              reject(new Error("失敗"));
+            }
+          }, 0);
+        });
+      }
+
+      // 第一種 first
+      const asyncFn = async (n) => {
+        const res = await promiseFn(n);
+        console.log(res);
+      };
+
+      const catchError = (asFn) => {
+        return asFn.catch((err) => {
+          console.log("catch:", err);
+        });
+      };
+
+      // catchError(asyncFn(1));
+      // 第一種 end
+
+      // 第二種寫法，所傳入的是async function，但還未被調用 start
+      const catchError2 = (asFn) => {
+        return (n) => {
+          console.log("catchError2 參數：", n);
+          return asFn(n).catch((err) => {
+            console.log("catch:", err);
+          });
+        };
+      };
+
+      catchError2(asyncFn)(0);
+
+      // [1, 2, 3].forEach(
+      //   catchError2(async (n) => {
+      //     const res = await axios.get(`https://jsonplaceholder.typicode.com/todos/${n}`);
+      //     console.log(res);
+      //   })
+      // );
+      // 第二種寫法 end
+    </script>
+  </body>
+</html>
